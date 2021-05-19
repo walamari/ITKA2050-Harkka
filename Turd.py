@@ -5,6 +5,7 @@ import queue
 import subprocess
 import threading
 import time
+import imghdr
 
 
 # Load configuration file
@@ -29,17 +30,10 @@ def checkerLoop(queue):
         """
     while True:
         filename = queue.get()
-        res = subprocess.run(
-            "file %s" % filename,
-            shell=True,
-            timeout=15,
-            stdout=subprocess.PIPE)
-        res = res.stdout.decode('utf-8')
-        print(res)
-        if not ("PNG image data" in res
-                or "JPEG image data" in res):
-            os.remove(filename)
-            bad_file_log.add(filename)
+        filetype = imghdr.what(filename)
+        if not (filetype == "jpeg" or filetype == "png"):
+                os.remove(filename)
+                bad_file_log.add(filename)
         else:
             suspicious_file_log.remove(os.path.basename(filename))
 
@@ -125,6 +119,10 @@ def checkPath(path):
     """ This will check and prevent path injections """
     if "../" in path:  #
         raise Exception("Possible Path-Injection")
+
+        
+
+
 
 @app.route('/share_file')
 def share_file():

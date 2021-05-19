@@ -3,7 +3,61 @@
 Palauttajat (max 3): N.N,  N.N ja N.N
 Pisteitä yhteensä: 3.
 
+
 ## Ongelma 1
+Tyyppi:   Shell-injektio
+Sijainti: Aliohjelma checkerLoop
+Kuvaus: CheckerLoop käynnistää shellin tarkistaakseen tiedoston tyypin. Tämä on ongelma, koska
+vihamielinen käyttäjä pystyy tiedoston nimen avulla käskyttämään shelliä haluamallaan tavalla.
+
+### Esimerkkihyökkäys: 
+1) Kirjaudu sisään
+2) Lataa kuva jonka tiedoston nimi sisällään esimerkiksi putkitetun shell käskyn
+    "kuva.png;echo kissa123"
+3) shelliin ilmestyy kissa123. Shell komento voi olla esimerkkiä paljon pahempi
+
+### Korjaus:
+Commit: 
+
+Korjasimme tämän aluksi Villen luentovideon ohjeilla, mikä oli melko simppeli tapa käsitellä
+shell-injektioita. Eli merkkijonon sijasta lähetimme rakenteisen listan file prosessille.
+Kuitenkin luennolla mainittiin siitä, että nämä shellin prosessit eivät ehkä ole paras tapa.
+Päätimme siis hyödyntää erillistä kirjastoa, joka tarkistaa tiedoston tyypin.
+
+Korjaus toimii, koska shelliä ei avata ollenkaan, vaan tiedoston tyyppi tarkistetaan erillistä kirjastoa hyödyntäen.
+
+
+## Ongelma 
+Tyyppi:  ????
+Sijainti: Login
+Kuvaus: Login:n jälkeen näkee salasanan ja käyttäjänimen sivun syötteessä
+
+### Esimerkkihyökkäys: 
+### Korjaus:
+### Pisteet(3pt)
+
+
+## Ongelma 
+Tyyppi:   Polkuinjektio
+Sijainti: rivi 126: if "../" in path:  #
+Kuvaus:
+
+Aliohjelmassa checkPath yritetään estää polkuinjetioita. Kuitenkin kohta "../" mahdollistaa hyökkäyksen. 
+
+### Esimerkkihyökkäys: 
+### Korjaus:   
+### Pisteet(3pt)
+
+
+
+### Pisteet(3pt)
+3 pistettä
+
+------------------
+Valmis esimerkki
+---------------
+## Ongelma 1
+
 Tyyppi:   Polkuinjektio
 Sijainti: delete_file()
 Kuvaus:
@@ -23,11 +77,6 @@ jonkin järjestelmätiedoston.
 
 Commit: <git hash>
 
-Korjasin tämän näin... 
-
-Korjaus toimii koska... 
-
-Korjaus estää uuden polkuinjektion syntymisen, sillä uutta reittiä luotaessa...
 
 ### Pisteet(3pt)
 
@@ -37,4 +86,3 @@ Korjaus estää uuden polkuinjektion syntymisen, sillä uutta reittiä luotaessa
 
 ## Ongelma 2
 
-...
