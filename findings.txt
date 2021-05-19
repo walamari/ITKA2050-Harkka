@@ -1,7 +1,10 @@
 ## Harjoitustyöraportti
 
-Palauttajat (max 3): N.N,  N.N ja N.N
+Palauttajat (max 3): Valtteri Peltoniemi ja  Joona Laitinen
+
 Pisteitä yhteensä: 3.
+
+===============================================================================================================
 
 
 ## Ongelma 1
@@ -17,7 +20,8 @@ vihamielinen käyttäjä pystyy tiedoston nimen avulla käskyttämään shelliä
 3) shelliin ilmestyy kissa123. Shell komento voi olla esimerkkiä paljon pahempi
 
 ### Korjaus:
-Commit: 
+
+Commit: 4bd62bded56dc9747f357ae94fe6bfd00b51557c
 
 Korjasimme tämän aluksi Villen luentovideon ohjeilla, mikä oli melko simppeli tapa käsitellä
 shell-injektioita. Eli merkkijonon sijasta lähetimme rakenteisen listan file prosessille.
@@ -26,8 +30,54 @@ Päätimme siis hyödyntää erillistä kirjastoa, joka tarkistaa tiedoston tyyp
 
 Korjaus toimii, koska shelliä ei avata ollenkaan, vaan tiedoston tyyppi tarkistetaan erillistä kirjastoa hyödyntäen.
 
+### Pisteet(3pt)
 
-## Ongelma 
+===============================================================================================================
+
+## Ongelma 2
+Tyyppi:   Polkuinjektio
+Sijainti: checkPath()-aliohjelma
+Kuvaus: Tällä hetkellä aliohjelma on melko kehnosti tehty suojautumaan polkuinjektioita vastaan. Tässä Aliohjelmassa
+tarkistetaan ainoastaan sisältääkö polku merkkijonon "../", mikä ei riitä suojautumisessa polkuinjektioilta.
+
+
+### Esimerkkihyökkäys: 
+1) Kirjaudutaan sisään
+2) Hae urlista tai komentorivillä ilman selainta haku, johon sisältyy suhteellinen polku, eli '../'-enkoodattuna tai
+'./'-(tämä menee läpi ilman koodausta).
+3) "Hyökkääjä" pääsee käsiksi tiedostorakenteisiin, joihin hänellä ei tulisi olla pääsyä
+
+### Korjaus:
+Korjasimme tämän normalisoimalla polun checkPath()-aliohjelmassa ja vertaamalla tätä syötettyyn polkuun. Jos polut eroavat toisistaan,
+voimme varmuudella heittää pathInjection-exceptionia.
+
+Korjaus toimii, koska se ei päästä läpi suhteellisia polkuja, jotka voivat johtaa polkuinjektioihin.
+
+### Pisteet(3pt)
+
+
+===============================================================================================================
+
+
+## Ongelma 3
+Tyyppi:  XSS-injektio
+Sijainti: Kuvan lisäämisessä ???
+Kuvaus: Tiedoston nimellä voidaan vaikuttaa html rakenteeseen ja sijoittaa sekaan ilkeämilinen scripti. 
+
+### Esimerkkihyökkäys: 
+1)kirjaudu sisään
+2) Lataa tiedosto jonka tiedostonimessä on html:ää, esimerkiksi tiedostonimi voisi olla "<button onmouseover="alert("HACK!")>".
+3) Tiedoston nimi muokkaa sivuston rakennetta merkittävästi ja tässä esimerkissä lisää sivustolle javascriptiä. Tietysti aikeet ja tiedostonnimeäminen
+voisi olla paljon ilkeämielisempääkin! 
+
+### Korjaus:
+### Pisteet(1pt)
+
+
+===============================================================================================================
+
+
+## Ongelma ?
 Tyyppi:  ????
 Sijainti: Login
 Kuvaus: Login:n jälkeen näkee salasanan ja käyttäjänimen sivun syötteessä
@@ -37,25 +87,15 @@ Kuvaus: Login:n jälkeen näkee salasanan ja käyttäjänimen sivun syötteessä
 ### Pisteet(3pt)
 
 
-## Ongelma 
-Tyyppi:   Polkuinjektio
-Sijainti: rivi 126: if "../" in path:  #
-Kuvaus:
-
-Aliohjelmassa checkPath yritetään estää polkuinjetioita. Kuitenkin kohta "../" mahdollistaa hyökkäyksen. 
-
-### Esimerkkihyökkäys: 
-### Korjaus:   
-### Pisteet(3pt)
 
 
 
-### Pisteet(3pt)
-3 pistettä
+
+
 
 ------------------
 Valmis esimerkki
----------------
+------------------
 ## Ongelma 1
 
 Tyyppi:   Polkuinjektio

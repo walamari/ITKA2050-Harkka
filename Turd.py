@@ -6,6 +6,7 @@ import subprocess
 import threading
 import time
 import imghdr
+import bleach
 
 
 # Load configuration file
@@ -117,13 +118,10 @@ def logout():
 
 def checkPath(path):
     """ This will check and prevent path injections """
-    if "../" in path:  #
-        raise Exception("Possible Path-Injection")
+    normalisoitu = os.path.normpath(path)
+    if not (normalisoitu == path): raise Exception("Possible Path-Injection")
 
         
-
-
-
 @app.route('/share_file')
 def share_file():
     """ This route handler will allow users to share files
@@ -207,7 +205,10 @@ def upload_file():
             return redirect(request.url)
         if thefile:
             checkPath(thefile.filename)
+
             target_path = path + '/' + thefile.filename
+
+
 
             # Mark the fle initially as suspicious. The checker thread will
             # remove this flag
