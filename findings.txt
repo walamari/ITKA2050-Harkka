@@ -74,7 +74,7 @@ voisi olla paljon ilkeämielisempääkin!
 
 ### Korjaus:
 
-Commit: 
+Commit: b51f6935c49d099c01e387d5d7ca2c3439ea4b52
 
 Korjasimme tämän tietoturvahaavoittuvuuden lisäämällä koodiin "bleach"-nimisen kirjaston, joka hoitaa käyttäjän syötteen,
 tässä tapauksessa tiedoston nimen sanitoimisen. 
@@ -83,6 +83,31 @@ Korjaus toimii, sillä bleachin clean()-metodi enkoodaa tiedostonimen suotuisaan
 
 ### Pisteet(3pt)
 
+
+===============================================================================================================
+
+
+## Ongelma 4
+Tyyppi:  Cookievirhe
+Sijainti: serve_file-, delete_file-, upload_file- ja share_file-aliohjelmassa, eli kaikkialla, missä kutsutaan
+         " request.cookies.get('username') " -komentoa
+Kuvaus: Esimerkiksi Chromen developer toolssia hyödyntämällä voidaan editoida(vaihtaa) käyttäjänimen cookien arvoa.
+        Esimerkiksi "samina" kirjautuneena voidaan tähän vaihtaa "sue" ja päästä käsiksi hänen tiedostoihin ja niiden
+        poistamiseen, jakamiseen ja lataamiseen.
+
+### Esimerkkihyökkäys: 
+1) Kirjaudu sisään samina
+2) Avaa etusivulla developer tools ja muuta application välilehden alta value sarakkeesta "sam" -> "sue". Päivitä sivu
+3) Vapaa pääsy suen tiedostoihin
+
+### Korjaus:
+Korjasimme tämän lisäämällä lähdekoodiin globaalin muuttujan, joka pitää sisällään tietoa siitä, kuka on kirjautunut
+sisään viimeksi. 
+
+Tämä korjaus toimii, koska jos sivustolla yrittää tehdä mitä vaan, kun cookien arvo on eriävä viimeksi kirjautuneen kanssa,
+niin järjestelmä kaatuu ja heittää poikkeuksen, jossa kerrotaan, että on koitettu käyttää cookiesseja väärin.
+
+### Pisteet(2pt)
 
 ===============================================================================================================
 

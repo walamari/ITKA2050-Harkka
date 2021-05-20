@@ -67,6 +67,10 @@ def login():
               You can now <a href="/user_content">check your files</a>
               """)
 
+            # Create global variable for user that is logged in and set it to username
+            global logged_user
+            logged_user = username
+
             # Set login cookie in the user browser
             resp.set_cookie('username', username)
 
@@ -112,7 +116,9 @@ def logout():
             <h1>System log out</h1>
             User %s has been logged out
             ''' % username)
-    resp.set_cookie('username', expires=0)
+    resp.set_cookie('username', '', expires=0)
+    global logged_user
+    logged_user = ''
     return resp
 
 
@@ -128,6 +134,8 @@ def share_file():
     """
 
     username = request.cookies.get('username')
+    if (logged_user != username) : 
+        raise Exception("Illegal change of cookies!")
     if not username: return redirect(url_for('login'))
     path = configuration['web_root'] + "/" + username
 
@@ -155,6 +163,8 @@ def delete_file():
     """
 
     username = request.cookies.get('username')
+    if (logged_user != username) : 
+        raise Exception("Illegal change of cookies!")
     if not username: return redirect(url_for('login'))
     path = configuration['web_root'] + "/" + username
 
@@ -192,6 +202,8 @@ def upload_file():
         we show a file upload prompt
     """
     username = request.cookies.get('username')
+    if (logged_user != username) : 
+        raise Exception("Illegal change of cookies!")
     if not username: return redirect(url_for('login'))
     path = configuration['web_root'] + "/" + username
 
@@ -241,6 +253,8 @@ def serve_file():
         user is shown a file listing
     """
     username = request.cookies.get('username')
+    if (logged_user != username) : 
+        raise Exception("Illegal change of cookies!")
     if not username: return redirect(url_for('login'))
 
     user_file = request.args.get('file')
