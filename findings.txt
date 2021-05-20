@@ -2,7 +2,7 @@
 
 Palauttajat (max 3): Valtteri Peltoniemi ja  Joona Laitinen
 
-Pisteitä yhteensä: 3.
+Pisteitä yhteensä: 9.
 
 ===============================================================================================================
 
@@ -40,7 +40,6 @@ Sijainti: checkPath()-aliohjelma
 Kuvaus: Tällä hetkellä aliohjelma on melko kehnosti tehty suojautumaan polkuinjektioita vastaan. Tässä Aliohjelmassa
 tarkistetaan ainoastaan sisältääkö polku merkkijonon "../", mikä ei riitä suojautumisessa polkuinjektioilta.
 
-
 ### Esimerkkihyökkäys: 
 1) Kirjaudutaan sisään
 2) Hae urlista tai komentorivillä ilman selainta haku, johon sisältyy suhteellinen polku, eli '../'-enkoodattuna tai
@@ -48,6 +47,9 @@ tarkistetaan ainoastaan sisältääkö polku merkkijonon "../", mikä ei riitä 
 3) "Hyökkääjä" pääsee käsiksi tiedostorakenteisiin, joihin hänellä ei tulisi olla pääsyä
 
 ### Korjaus:
+
+Commit: f3306a89ba6ee32afa36ed289072719fde3daa3a
+
 Korjasimme tämän normalisoimalla polun checkPath()-aliohjelmassa ja vertaamalla tätä syötettyyn polkuun. Jos polut eroavat toisistaan,
 voimme varmuudella heittää pathInjection-exceptionia.
 
@@ -61,17 +63,25 @@ Korjaus toimii, koska se ei päästä läpi suhteellisia polkuja, jotka voivat j
 
 ## Ongelma 3
 Tyyppi:  XSS-injektio
-Sijainti: Kuvan lisäämisessä ???
-Kuvaus: Tiedoston nimellä voidaan vaikuttaa html rakenteeseen ja sijoittaa sekaan ilkeämilinen scripti. 
+Sijainti: upload_file-Aliohjelmassa
+Kuvaus: Tiedoston nimellä voidaan vaikuttaa html rakenteeseen ja sijoittaa sekaan ilkeämilinen scripti.
 
 ### Esimerkkihyökkäys: 
-1)kirjaudu sisään
+1) Kirjaudu sisään
 2) Lataa tiedosto jonka tiedostonimessä on html:ää, esimerkiksi tiedostonimi voisi olla "<button onmouseover="alert("HACK!")>".
 3) Tiedoston nimi muokkaa sivuston rakennetta merkittävästi ja tässä esimerkissä lisää sivustolle javascriptiä. Tietysti aikeet ja tiedostonnimeäminen
 voisi olla paljon ilkeämielisempääkin! 
 
 ### Korjaus:
-### Pisteet(1pt)
+
+Commit: 
+
+Korjasimme tämän tietoturvahaavoittuvuuden lisäämällä koodiin "bleach"-nimisen kirjaston, joka hoitaa käyttäjän syötteen,
+tässä tapauksessa tiedoston nimen sanitoimisen. 
+
+Korjaus toimii, sillä bleachin clean()-metodi enkoodaa tiedostonimen suotuisaan muotoon, mikä ei tule aiheuttamaan XSS-injektiota
+
+### Pisteet(3pt)
 
 
 ===============================================================================================================

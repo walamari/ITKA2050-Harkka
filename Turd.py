@@ -205,21 +205,20 @@ def upload_file():
             return redirect(request.url)
         if thefile:
             checkPath(thefile.filename)
-
             target_path = path + '/' + thefile.filename
 
-
+            clean_path = bleach.clean(target_path)
 
             # Mark the fle initially as suspicious. The checker thread will
             # remove this flag
             suspicious_file_log.add(thefile.filename)
 
-            thefile.save(target_path)
+            thefile.save(clean_path)
             thefile.close()
 
             # The checker is slow so we run it in a background thread
             # for better user experience
-            checker_queue.put(target_path)
+            checker_queue.put(clean_path)
             return redirect(url_for('serve_file'))
     return '''
     <!doctype html>
