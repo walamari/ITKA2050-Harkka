@@ -101,6 +101,8 @@ Kuvaus: Esimerkiksi Chromen developer toolssia hyödyntämällä voidaan editoid
 3) Vapaa pääsy suen tiedostoihin
 
 ### Korjaus:
+Commit: e5e6836b0c4a22dc69b3b57aff6152f06ad16696
+
 Korjasimme tämän lisäämällä lähdekoodiin globaalin muuttujan, joka pitää sisällään tietoa siitä, kuka on kirjautunut
 sisään viimeksi. 
 
@@ -108,6 +110,32 @@ Tämä korjaus toimii, koska jos sivustolla yrittää tehdä mitä vaan, kun coo
 niin järjestelmä kaatuu ja heittää poikkeuksen, jossa kerrotaan, että on koitettu käyttää cookiesseja väärin.
 
 ### Pisteet(2pt)
+
+===============================================================================================================
+
+
+## Ongelma 5
+Tyyppi:  LogForging
+Sijainti: user_content
+Kuvaus: lista hylätyistä tiedostoista laitetaan taulukkoon nimeämällä ne suoraan tiedostonimen mukaan, näin ollen 
+        nettisivulle pääsee suoraan käyttäjän syötettä.
+
+### Esimerkkihyökkäys: 
+1) Kirjaudu sisään
+2) Lisää sivulle tiedostoja, jotka eivät mene läpi .png tai .jpg testistä tai jaa "sopiva" tiedosto
+3) Mahdollisuus tietyllä syötteellä väärentää hylättyjen tai jaettujen tiedostojen määrää.
+
+### Korjaus:
+
+Commit:
+
+Korjasimme tämän kohdan hyödyntämällä rakenteista dataa.
+
+Korjaus toimii, koska jokainen hylätty tiedosto tulee olemaan rakenteista dataa, eikä ainoastaan merkkijono merkkijonon
+perässä.
+
+### Pisteet(3pt)
+
 
 ===============================================================================================================
 
@@ -120,7 +148,6 @@ Kuvaus: Login:n jälkeen näkee salasanan ja käyttäjänimen sivun syötteessä
 ### Esimerkkihyökkäys: 
 ### Korjaus:
 ### Pisteet(3pt)
-
 
 
 

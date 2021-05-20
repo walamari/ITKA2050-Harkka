@@ -7,6 +7,7 @@ import threading
 import time
 import imghdr
 import bleach
+import json
 
 
 # Load configuration file
@@ -277,9 +278,8 @@ def serve_file():
             if not f in suspicious_file_log  # Remove suspicious files
         ])
 
-        shared_list = "\n".join([
-            """<a href='/user_content?file=%s'>%s</a>
-            """
+        shared_list = json.dumps([
+            """<a href='/user_content?file=%s'>%s</a>"""
             % (f,f) for f in shared_files
             if not f in suspicious_file_log  # Remove suspicious files
         ])
@@ -287,7 +287,7 @@ def serve_file():
         rejects = ""
         if bad_file_log:
             rejects = ("<h1>Some files were rejected</h1>"
-                       "<p>" + "\n".join(bad_file_log) + "</p>")
+                       "<p>" + json.dumps(list(bad_file_log)) + "</p>")
         return '''
             <!doctype html>
             <title>Files:</title>
@@ -303,4 +303,4 @@ def serve_file():
             </form>
             <br>
             <a href="/logout">log out</a>
-            ''' % (link_list, rejects,shared_list)
+            ''' % (link_list, rejects, shared_list)
