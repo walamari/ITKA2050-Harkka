@@ -127,7 +127,7 @@ Kuvaus: lista hylätyistä tiedostoista laitetaan taulukkoon nimeämällä ne su
 
 ### Korjaus:
 
-Commit:
+Commit: 65537fc33dcd249f8e6d8b91baa8a7cff4f05a2d
 
 Korjasimme tämän kohdan hyödyntämällä rakenteista dataa.
 
@@ -153,11 +153,38 @@ voi tähän muuttujaan sijoittaa haitallisen merkkijonon.
 3) Haitallinen käyttäjänimi muuttaa sivun rakennetta
 
 ### Korjaus:
-Kohta korjattu sanitoimalla käyttäjänimet. Sanitointi suoritetaan bleach-kirjaston clean metodilla. 
+
+Commit: 9d9799c313aec83b8cc7ad98017af2316b134e89
+
+Kohta korjaantuisi sanitoimalla käyttäjänimet. Sanitointi suoritetaan bleach-kirjaston clean metodilla.
+Kuitenkin tällähetkellä ohjelmaan kovakoodataan käyttäjänimet ja salasanat, joten korjaus tulisi oleelliseksi kun käyttäjät 
+voivat luoda omia käyttäjiä ohjelmaan. 
+
 
 Korjaus toimii koska clean metodi muuntaa käyttäjänimen html-elementit vaarattomiksi
 
 ### Pisteet(3pt)
+
+
+===============================================================================================================
+
+
+## Ongelma 7
+Tyyppi: Url tietoturva
+Sijainti: Login succesfull url
+Kuvaus: Login:n jälkeen näkee salasanan ja käyttäjänimen sivun syötteessä
+
+### Esimerkkihyökkäys: 
+1) Kirjaudu sisään
+2) Jätä login succesfull näkyville
+3) Pahaa tahtova taho voi nähdä käyttäjänimen ja salasanan login succesfull sivun url:ssa 
+   ja kirjautua sinuna myöhemmin sisään
+
+### Korjaus:
+Kohta korjaantuu mahdollisesti muuttamalla lähdekoodin toimintaa radikaalisti siten, että login succesfull sivua ei tulisi
+ollenkaan vaan ohjelma siirtyisi suoraan onnistuneen kirjautumisen jälkeen käyttäjän tietoihin.
+
+### Pisteet(1pt)
 
 
 ===============================================================================================================
@@ -171,8 +198,6 @@ Kuvaus: Login:n jälkeen näkee salasanan ja käyttäjänimen sivun syötteessä
 ### Esimerkkihyökkäys: 
 ### Korjaus:
 ### Pisteet(3pt)
-
-
 
 
 
