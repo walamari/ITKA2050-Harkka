@@ -181,6 +181,9 @@ Kuvaus: Login:n jälkeen näkee salasanan ja käyttäjänimen sivun syötteessä
    ja kirjautua sinuna myöhemmin sisään
 
 ### Korjaus:
+
+commit: 7d0c425a46882e6ea27739fb281648c46a4712f5
+
 Kohta korjaantuu mahdollisesti muuttamalla lähdekoodin toimintaa radikaalisti siten, että login succesfull sivua ei tulisi
 ollenkaan vaan ohjelma siirtyisi suoraan onnistuneen kirjautumisen jälkeen käyttäjän tietoihin.
 
@@ -189,15 +192,20 @@ ollenkaan vaan ohjelma siirtyisi suoraan onnistuneen kirjautumisen jälkeen käy
 
 ===============================================================================================================
 
-
-## Ongelma ?
-Tyyppi:  ????
-Sijainti: Login
-Kuvaus: Login:n jälkeen näkee salasanan ja käyttäjänimen sivun syötteessä
+## Ongelma 8
+Tyyppi: Tietoturvaongelma
+Sijainti: Käyttäjänimen ja salasanan kovakoodaus
+Kuvaus: Lähdekoodiin on kovakoodattu kaikki käyttäjätunnukset ja salasanat, joten lähdekoodin haltija pääsee 
+        käsiksi kaikkiin käyttäjiin.
 
 ### Esimerkkihyökkäys: 
+1) Pääse käsiksi lähdekoodiin, hyökkäämällä tai vahingossa.
+2) Lähdekoodista pääsee käsiksi kaikkien käyttäjien kirjautumistietoihin
+
 ### Korjaus:
-### Pisteet(3pt)
+Ongelma voisi korjaantua siirtämällä käyttäjänimet ja salasanat vaikka tietokantaan ja salaamalla ne
+
+### Pisteet(1pt)
 
 
 
@@ -233,5 +241,5 @@ Commit: <git hash>
 1pt vian korjaamisesta
 1pt vikatyypin eliminoimisesta
 
-## Ongelma 2
+
 
