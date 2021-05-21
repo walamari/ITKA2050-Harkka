@@ -2,7 +2,7 @@
 
 Palauttajat (max 3): Valtteri Peltoniemi ja  Joona Laitinen
 
-Pisteitä yhteensä: 9.
+Pisteitä yhteensä: 17.
 
 ===============================================================================================================
 
@@ -140,6 +140,29 @@ perässä.
 ===============================================================================================================
 
 
+## Ongelma 6
+Tyyppi:  XSS-injektio
+Sijainti: logout
+Kuvaus: JOS järjestelmään olisi mahdollista luoda uusi käyttäjä, käyttäen vapaavalintaista käyttäjänimeä ilman sanitointia
+voi tähän muuttujaan sijoittaa haitallisen merkkijonon.
+
+
+### Esimerkkihyökkäys: 
+1) Luo uusi käyttäjä haitallisella käyttäjänimellä
+2) Kirjaudu ulos
+3) Haitallinen käyttäjänimi muuttaa sivun rakennetta
+
+### Korjaus:
+Kohta korjattu sanitoimalla käyttäjänimet. Sanitointi suoritetaan bleach-kirjaston clean metodilla. 
+
+Korjaus toimii koska clean metodi muuntaa käyttäjänimen html-elementit vaarattomiksi
+
+### Pisteet(3pt)
+
+
+===============================================================================================================
+
+
 ## Ongelma ?
 Tyyppi:  ????
 Sijainti: Login
@@ -148,7 +171,6 @@ Kuvaus: Login:n jälkeen näkee salasanan ja käyttäjänimen sivun syötteessä
 ### Esimerkkihyökkäys: 
 ### Korjaus:
 ### Pisteet(3pt)
-
 
 
 

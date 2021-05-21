@@ -46,7 +46,7 @@ t.start()
 
 ## Here are the system users. Until we have more than 10 users we will
 ## just hardcode them here:
-users = {"lion": "Y_SFX", "sue": "qwwerty", "sam": "ghghghg"}
+users = {"lion": "Y_SFX", "sue": "qwwerty", "sam": "ghghghg", }
 
 @app.route('/login')
 def login():
