@@ -2,7 +2,7 @@
 
 Palauttajat (max 3): Valtteri Peltoniemi ja  Joona Laitinen
 
-Pisteitä yhteensä: 17.
+Pisteitä yhteensä: 20.
 
 ===============================================================================================================
 
@@ -208,38 +208,30 @@ Ongelma voisi korjaantua siirtämällä käyttäjänimet ja salasanat vaikka tie
 ### Pisteet(1pt)
 
 
+===============================================================================================================
 
+## Ongelma 9
 
-------------------
-Valmis esimerkki
-------------------
-## Ongelma 1
-
-Tyyppi:   Polkuinjektio
-Sijainti: delete_file()
-Kuvaus:
-
-Aliohjelmassa delete_file ei tarkasteta käyttäjän syöttämää polkua
-millään tavalla. Tämä mahdollistaa sen, että käyttäjä tuhoaa minkä
-tahansa tiedoston, esimerkiksi toisen käyttäjän tiedoston tai vaikkapa
-jonkin järjestelmätiedoston.
+Tyyppi: riippuvuussuhdehyökkäys
+Sijainti: Lähdekoodi
+Kuvaus: lähdekoodiin on importattu paketteja, joita ei ole itse sinne importattu. On teoriasssa mahdollista että 
+        nämä importit sisältävät haittakoodia
 
 ### Esimerkkihyökkäys: 
 
-1) Kirjaudu sisään käyttäjänä "sam".
-2) Tee pyyntö /delete_file?file=../sue/tiedosto.txt
-3) Tulos: Suen tiedosto tuhotaan
+1) Lataa paketti, joka sisältää haitallista koodissa.
+2) Paketin haitallinen koodi aiheuttaa haavoittuvuuden. 
+
 
 ### Korjaus:
+
+Kirjotojen tarkastaminen ja sellaisten kirjastojen käyttäminen joiden toiminnasta olet täysin varma. 
+Myös oman kirjaston tekeminen on vaihtoehto.
 
 Commit: <git hash>
 
 
-### Pisteet(3pt)
-
-1pt vian löytämisestä
-1pt vian korjaamisesta
-1pt vikatyypin eliminoimisesta
+### Pisteet(1pt)
 
 
 
