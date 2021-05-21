@@ -203,6 +203,9 @@ Kuvaus: Lähdekoodiin on kovakoodattu kaikki käyttäjätunnukset ja salasanat, 
 2) Lähdekoodista pääsee käsiksi kaikkien käyttäjien kirjautumistietoihin
 
 ### Korjaus:
+
+Commit: 84e0301fc1d795a9b38a7590acbe5cb508631703
+
 Ongelma voisi korjaantua siirtämällä käyttäjänimet ja salasanat vaikka tietokantaan ja salaamalla ne
 
 ### Pisteet(1pt)
@@ -228,7 +231,7 @@ Kuvaus: lähdekoodiin on importattu paketteja, joita ei ole itse sinne importatt
 Kirjotojen tarkastaminen ja sellaisten kirjastojen käyttäminen joiden toiminnasta olet täysin varma. 
 Myös oman kirjaston tekeminen on vaihtoehto.
 
-Commit: <git hash>
+Commit: 330fa7258ee167f640e29fa2d9044543be122317
 
 
 ### Pisteet(1pt)
